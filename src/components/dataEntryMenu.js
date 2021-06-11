@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import logo from "../External Files/logo.png";
 import "../assets/App.css";
+
+const logo = "/logo.png";
 
 function dataEntryMenu() {
   return (
@@ -17,26 +18,34 @@ function dataEntryMenu() {
       </div>
       <div className="Body text-align-center">
         <div>
-          <button className="Buttons">
-            <Link to="/">Home</Link>
-          </button>
+          <Link to="/">
+            <button className="Buttons">Home</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">
-            <Link to="/dataEntry/form">Ministries Form</Link>
-          </button>
+          <Link to="/dataEntry/form/Candidates">
+            <button className="Buttons">Candidate Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">Divisions Form</button>
+          <Link to="/dataEntry/form/Divisions">
+            <button className="Buttons">Divisions Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">Employees Form</button>
+          <Link to="/dataEntry/form/Employees">
+            <button className="Buttons">Employees Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">Ministries Form</button>
+          <Link to="/dataEntry/form/Ministries">
+            <button className="Buttons">Ministries Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">Positions Form</button>
+          <Link to="/dataEntry/form/Positions">
+            <button className="Buttons">Positions Form</button>
+          </Link>
         </div>
       </div>
       <div className="Footer text-align-center">

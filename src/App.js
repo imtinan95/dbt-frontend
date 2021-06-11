@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import logo from "./External Files/logo.png";
 import "./assets/App.css";
 
+const logo = "/logo.png";
 function App() {
   return (
     <div className="App">
@@ -16,24 +16,24 @@ function App() {
       </div>
       <div className="Body text-align-center">
         <div>
-          <button className="Buttons">
-            <Link to="/">Home</Link>
-          </button>
+          <Link to="/">
+            <button className="Buttons">Home</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">
-            <Link to="/dataEntry">Data Entry Form</Link>
-          </button>
+          <Link to="/dataEntry">
+            <button className="Buttons">Data Entry Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">
-            <Link to="/queries">Queries Form</Link>
-          </button>
+          <Link to="/queries">
+            <button className="Buttons">Queries Form</button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">
-            <Link to="/reports">Reports Form</Link>
-          </button>
+          <Link to="/reports">
+            <button className="Buttons">Reports Form</button>
+          </Link>
         </div>
       </div>
       <div className="Footer text-align-center">

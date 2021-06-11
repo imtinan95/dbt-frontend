@@ -3,10 +3,18 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 const Home = React.lazy(() => import("./App"));
 const DataEntry = React.lazy(() => import("./components/dataEntryMenu"));
-const DataEntryForm = React.lazy(() => import("./components/dataEntryForm"));
-const Query = React.lazy(() => import("./components/queryForm"));
-const Report = React.lazy(() => import("./components/reportForm"));
+const Query = React.lazy(() => import("./components/queryMenu"));
+const Report = React.lazy(() => import("./components/reportMenu"));
 
+const Candidates = React.lazy(() =>
+  import("./components/forms/formCandidates")
+);
+const Divisions = React.lazy(() => import("./components/forms/formDivisions"));
+const Employees = React.lazy(() => import("./components/forms/formEmployees"));
+const Ministries = React.lazy(() =>
+  import("./components/forms/formMinistries")
+);
+const Positions = React.lazy(() => import("./components/forms/formPositions"));
 function Routes() {
   return (
     <BrowserRouter>
@@ -22,8 +30,20 @@ function Routes() {
           <Route exact path="/dataEntry">
             <DataEntry />
           </Route>
-          <Route exact path="/dataEntry/form">
-            <DataEntryForm />
+          <Route exact path="/dataEntry/form/Candidates">
+            <Candidates />
+          </Route>
+          <Route exact path="/dataEntry/form/Divisions">
+            <Divisions />
+          </Route>
+          <Route exact path="/dataEntry/form/Employees">
+            <Employees />
+          </Route>
+          <Route exact path="/dataEntry/form/Ministries">
+            <Ministries />
+          </Route>
+          <Route exact path="/dataEntry/form/Positions">
+            <Positions />
           </Route>
 
           <Route exact path="/queries">
