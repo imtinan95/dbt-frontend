@@ -28,32 +28,27 @@ function dataEntryMenu() {
               Candidate Roll:
               <input type="text" className="inputFields" />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Candidate Name:
               <input type="text" className="inputFields" />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               CNIC:
               <input type="text" className="inputFields" />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Contact:
               <input type="text" className="inputFields" />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               DOB:
               <input type="text" className="inputFields" />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Degree:
               <input type="text" className="inputFields" />

@@ -21,6 +21,11 @@ function App() {
           </Link>
         </div>
         <div>
+          <Link to="/getData">
+            <button className="Buttons">Get Data</button>
+          </Link>
+        </div>
+        <div>
           <Link to="/dataEntry">
             <button className="Buttons">Data Entry Form</button>
           </Link>

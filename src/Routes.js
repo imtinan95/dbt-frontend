@@ -15,6 +15,7 @@ const Ministries = React.lazy(() =>
   import("./components/forms/formMinistries")
 );
 const Positions = React.lazy(() => import("./components/forms/formPositions"));
+const Data = React.lazy(() => import("./components/fetch"));
 function Routes() {
   return (
     <BrowserRouter>
@@ -51,6 +52,9 @@ function Routes() {
           </Route>
           <Route exact path="/reports">
             <Report />
+          </Route>
+          <Route exact path="/getData">
+            <Data />
           </Route>
         </Switch>
       </Suspense>

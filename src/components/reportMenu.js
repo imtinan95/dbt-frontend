@@ -15,26 +15,14 @@ function reportForm() {
         </div>
       </div>
       <div className="Body text-align-center">
-        <div>
-          <Link to="/">
-            <button className="Buttons">Home</button>
-          </Link>
-        </div>
-        <div>
-          <button className="Buttons">Candidates Report</button>
-        </div>
-        <div>
-          <button className="Buttons">Divisions Report</button>
-        </div>
-        <div>
-          <button className="Buttons">Employees Report</button>
-        </div>
-        <div>
-          <button className="Buttons">Ministries Report</button>
-        </div>
-        <div>
-          <button className="Buttons">Positions Report</button>
-        </div>
+        <Link to="/">
+          <button className="Buttons">Home</button>
+        </Link>
+        <button className="Buttons">Candidates Report</button>
+        <button className="Buttons">Divisions Report</button>
+        <button className="Buttons">Employees Report</button>
+        <button className="Buttons">Ministries Report</button>
+        <button className="Buttons">Positions Report</button>
       </div>
       <div className="Footer text-align-center">
         <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
