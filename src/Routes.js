@@ -46,7 +46,6 @@ function Routes() {
           <Route exact path="/dataEntry/form/Positions">
             <Positions />
           </Route>
-
           <Route exact path="/queries">
             <Query />
           </Route>

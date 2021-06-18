@@ -1,30 +1,76 @@
-import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import "../assets/fetch.css";
 
-class fetch extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-    };
-  }
+const logo = "/logo.png";
 
-  componentDidMount() {
-    fetch("https://localhost:61691")
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          data: data.url,
-        });
-      });
-  }
+function Fetch() {
+  const formicka = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      pass: "",
+    },
+    onSubmit: (values) => {
+      console.log("form vales", formicka.values);
+    },
+  });
 
-  render() {
-    return (
-      <div>
-        <h1>Welcome to React App that is getting data from localhost:61691`</h1>
+  return (
+    <div>
+      <div className="Header">
+        <img src={logo} width="150" alt="FPSC_Logo"></img>
+        <div className="Title text-align-center">
+          <h1 className="TitleName">
+            Federal Public Service Commission, Pakistan
+          </h1>
+          <h3>DataFetch</h3>
+        </div>
       </div>
-    );
-  }
+      <div className="Body text-align-center">
+        <div>
+          <Link to="/">
+            <button className="Buttons">Home</button>
+          </Link>
+        </div>
+        <div className="formicka">
+          <form onSubmit={formicka.handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={formicka.handleChange}
+              value={formicka.values.name}
+            />
+
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              onChange={formicka.handleChange}
+              value={formicka.values.email}
+            />
+
+            <label htmlFor="pass">Password</label>
+            <input
+              type="password"
+              id="pass"
+              name="pass"
+              onChange={formicka.handleChange}
+              value={formicka.values.pass}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div className="Footer text-align-center">
+        <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
+        <p>Reg No. 4018-FBAS/BSCS/F18</p>
+      </div>
+    </div>
+  );
 }
 
-export default fetch;
+export default Fetch;

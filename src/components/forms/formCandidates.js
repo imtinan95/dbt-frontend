@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-
+import { useFormik } from "formik";
 import "../../assets/App.css";
 import "../../assets/dataEntryForm.css";
 
 const logo = "/logo.png";
-function dataEntryMenu() {
+function DataEntryMenu() {
+  const formikCandidate = useFormik({
+    initialValues: {},
+  });
   return (
     <div className="App">
       <div className="Header">
@@ -24,35 +27,11 @@ function dataEntryMenu() {
         </div>
         <div className="dataContainer">
           <form>
-            <label className="labels">
-              Candidate Roll:
-              <input type="text" className="inputFields" />
-            </label>
+            <label htmlFor="roll">Candidate Roll:</label>
+            <input type="text" id="roll" name="roll" />
 
-            <label className="labels">
-              Candidate Name:
-              <input type="text" className="inputFields" />
-            </label>
-
-            <label className="labels">
-              CNIC:
-              <input type="text" className="inputFields" />
-            </label>
-
-            <label className="labels">
-              Contact:
-              <input type="text" className="inputFields" />
-            </label>
-
-            <label className="labels">
-              DOB:
-              <input type="text" className="inputFields" />
-            </label>
-
-            <label className="labels">
-              Degree:
-              <input type="text" className="inputFields" />
-            </label>
+            <label htmlFor="roll">Candidate Roll:</label>
+            <input type="text" id="roll" name="roll" />
           </form>
         </div>
         <div className="submitButtons">
@@ -70,4 +49,4 @@ function dataEntryMenu() {
   );
 }
 
-export default dataEntryMenu;
+export default DataEntryMenu;
