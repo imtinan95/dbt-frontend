@@ -1,10 +1,23 @@
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
 import "../../assets/App.css";
 import "../../assets/dataEntryForm.css";
 
 const logo = "/logo.png";
-function dataEntryMenu() {
+function MinistryForm() {
+  const formikMinistry = useFormik({
+    initialValues: {
+      minID: "",
+      minName: "",
+      minHQ: "",
+      minDivs: "",
+      minstrRes: "",
+    },
+    onSubmit: (values) => {
+      console.log("Ministry Data", formikMinistry.values);
+    },
+  });
   return (
     <div className="App">
       <div className="Header">
@@ -23,46 +36,75 @@ function dataEntryMenu() {
           </Link>
         </div>
         <div className="dataContainer">
-          <form>
+          <form onSubmit={formikMinistry.handleSubmit}>
             <label className="labels">
               Ministry ID:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="minID"
+                name="minID"
+                onChange={formikMinistry.handleChange}
+                values={formikMinistry.values.minID}
+              />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Ministry Name:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="minName"
+                name="minName"
+                onChange={formikMinistry.handleChange}
+                values={formikMinistry.values.minName}
+              />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Ministry HQ:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="minHQ"
+                name="minHQ"
+                onChange={formikMinistry.handleChange}
+                values={formikMinistry.values.minHQ}
+              />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Ministry Divisions:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="minDivs"
+                name="minDivs"
+                onChange={formikMinistry.handleChange}
+                values={formikMinistry.values.minDivs}
+              />
             </label>
-          </form>
-          <form>
+
             <label className="labels">
               Minister Responsible:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="minstrRes"
+                name="minstrRes"
+                onChange={formikMinistry.handleChange}
+                values={formikMinistry.values.minstrRes}
+              />
             </label>
-          </form>
-          <form>
-            <label className="labels">
-              Degree:
-              <input type="text" className="inputFields" />
-            </label>
+
+            <button className="Buttons" type="submit">
+              Save
+            </button>
           </form>
         </div>
         <div className="submitButtons">
           <button className="Buttons">Previous</button>
-          <button className="Buttons">Save</button>
+
           <button className="Buttons">Delete</button>
           <button className="Buttons">Next</button>
         </div>
@@ -75,4 +117,4 @@ function dataEntryMenu() {
   );
 }
 
-export default dataEntryMenu;
+export default MinistryForm;

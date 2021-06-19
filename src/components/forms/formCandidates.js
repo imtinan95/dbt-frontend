@@ -4,9 +4,19 @@ import "../../assets/App.css";
 import "../../assets/dataEntryForm.css";
 
 const logo = "/logo.png";
-function DataEntryMenu() {
+function CandidateForm() {
   const formikCandidate = useFormik({
-    initialValues: {},
+    initialValues: {
+      roll: "",
+      name: "",
+      cnic: "",
+      contact: "",
+      date: "",
+      degree: "",
+    },
+    onSubmit: (values) => {
+      console.log("Candidate Values", formikCandidate.values);
+    },
   });
   return (
     <div className="App">
@@ -26,17 +36,86 @@ function DataEntryMenu() {
           </Link>
         </div>
         <div className="dataContainer">
-          <form>
-            <label htmlFor="roll">Candidate Roll:</label>
-            <input type="text" id="roll" name="roll" />
+          <form onSubmit={formikCandidate.handleSubmit}>
+            <label htmlFor="roll">
+              Candidate Roll:
+              <input
+                type="text"
+                id="roll"
+                name="roll"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.roll}
+              />
+            </label>
 
-            <label htmlFor="roll">Candidate Roll:</label>
-            <input type="text" id="roll" name="roll" />
+            <label htmlFor="name">
+              Candidate Name:
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.name}
+              />
+            </label>
+
+            <label htmlFor="cnic">
+              Candidate CNIC:{" "}
+              <input
+                type="text"
+                id="cnic"
+                name="cnic"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.cnic}
+              />
+            </label>
+
+            <label htmlFor="contact">
+              Candidate Contact:
+              <input
+                type="text"
+                id="contact"
+                name="contact"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.contact}
+              />
+            </label>
+
+            <label htmlFor="date">
+              Candidate Date:
+              <input
+                type="date"
+                id="date"
+                name="date"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.date}
+              />
+            </label>
+
+            <label htmlFor="degree">
+              Candidate Degree:
+              <input
+                type="text"
+                id="degree"
+                name="degree"
+                className="inputFields"
+                onChange={formikCandidate.handleChange}
+                value={formikCandidate.values.degree}
+              />
+            </label>
+
+            <button className="Buttons" type="submit">
+              Save
+            </button>
           </form>
         </div>
         <div className="submitButtons">
           <button className="Buttons">Previous</button>
-          <button className="Buttons">Save</button>
           <button className="Buttons">Delete</button>
           <button className="Buttons">Next</button>
         </div>
@@ -49,4 +128,4 @@ function DataEntryMenu() {
   );
 }
 
-export default DataEntryMenu;
+export default CandidateForm;

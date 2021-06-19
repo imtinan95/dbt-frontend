@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import "../assets/App.css";
+
 const logo = "/logo.png";
 function reportForm() {
   return (

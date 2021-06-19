@@ -8,10 +8,17 @@
   margin: 20px;
 }
 .inputFields {
-  margin-left: 20px;
-  /* text-align: right; */
+  margin-left: 75px;
+  margin-bottom: 5px;
 }
 
 .labels {
   text-align: left;
+}
+form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-size: 18px;
 }

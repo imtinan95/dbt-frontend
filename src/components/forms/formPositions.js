@@ -1,10 +1,24 @@
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
 import "../../assets/App.css";
 import "../../assets/dataEntryForm.css";
 
 const logo = "/logo.png";
-function dataEntryMenu() {
+function PositionsForm() {
+  const formikPositions = useFormik({
+    initialValues: {
+      posID: "",
+      posName: "",
+      posDesignation: "",
+      posPay: "",
+      posCity: "",
+    },
+    onSubmit: (values) => {
+      console.log("Position Data", formikPositions.values);
+    },
+  });
+
   return (
     <div className="App">
       <div className="Header">
@@ -23,40 +37,70 @@ function dataEntryMenu() {
           </Link>
         </div>
         <div className="dataContainer">
-          <form>
+          <form onSubmit={formikPositions.handleSubmit}>
             <label className="labels">
               Position ID:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="posID"
+                name="posID"
+                onChange={formikPositions.handleChange}
+                value={formikPositions.values.posID}
+              />
             </label>
-          </form>
-          <form>
             <label className="labels">
               Position Name:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="posName"
+                name="posName"
+                onChange={formikPositions.handleChange}
+                value={formikPositions.values.posName}
+              />
             </label>
-          </form>
-          <form>
             <label className="labels">
               Designation:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="posDesignation"
+                name="posDesignation"
+                onChange={formikPositions.handleChange}
+                value={formikPositions.values.posDesignation}
+              />
             </label>
-          </form>
-          <form>
             <label className="labels">
-              Pay:
-              <input type="text" className="inputFields" />
+              Position Pay:
+              <input
+                type="text"
+                className="inputFields"
+                id="posPay"
+                name="posPay"
+                onChange={formikPositions.handleChange}
+                value={formikPositions.values.posPay}
+              />
             </label>
-          </form>
-          <form>
             <label className="labels">
               Posting City:
-              <input type="text" className="inputFields" />
+              <input
+                type="text"
+                className="inputFields"
+                id="posCity"
+                name="posCity"
+                onChange={formikPositions.handleChange}
+                value={formikPositions.values.posCity}
+              />
             </label>
+            <button className="Buttons" type="submit">
+              Save
+            </button>
           </form>
         </div>
         <div className="submitButtons">
           <button className="Buttons">Previous</button>
-          <button className="Buttons">Save</button>
+
           <button className="Buttons">Delete</button>
           <button className="Buttons">Next</button>
         </div>
@@ -69,4 +113,4 @@ function dataEntryMenu() {
   );
 }
 
-export default dataEntryMenu;
+export default PositionsForm;

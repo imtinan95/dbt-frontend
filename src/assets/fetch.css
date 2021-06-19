@@ -35,8 +35,10 @@ html {
 
   height: 80%;
 }
-.formicka {
+.inputField {
+  margin: 10px;
 }
+
 form {
   display: flex;
   flex-direction: column;

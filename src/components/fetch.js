@@ -35,32 +35,42 @@ function Fetch() {
         </div>
         <div className="formicka">
           <form onSubmit={formicka.handleSubmit}>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              onChange={formicka.handleChange}
-              value={formicka.values.name}
-            />
+            <label htmlFor="name">
+              Name
+              <input
+                type="text"
+                id="name"
+                name="name"
+                onChange={formicka.handleChange}
+                value={formicka.values.name}
+                className="inputField"
+              />
+            </label>
 
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              onChange={formicka.handleChange}
-              value={formicka.values.email}
-            />
+            <label htmlFor="email">
+              Email
+              <input
+                type="email"
+                id="email"
+                name="email"
+                onChange={formicka.handleChange}
+                value={formicka.values.email}
+                className="inputField"
+              />
+            </label>
 
-            <label htmlFor="pass">Password</label>
-            <input
-              type="password"
-              id="pass"
-              name="pass"
-              onChange={formicka.handleChange}
-              value={formicka.values.pass}
-            />
+            <label htmlFor="pass">
+              Password
+              <input
+                type="password"
+                id="pass"
+                name="pass"
+                onChange={formicka.handleChange}
+                value={formicka.values.pass}
+                className="inputField"
+              />
+            </label>
+
             <button type="submit">Submit</button>
           </form>
         </div>
