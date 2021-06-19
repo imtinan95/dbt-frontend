@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { useFormik } from "formik";
 import "../assets/fetch.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const logo = "/logo.png";
 
@@ -13,6 +16,22 @@ function Fetch() {
     },
     onSubmit: (values) => {
       console.log("form vales", formicka.values);
+
+      axios
+        .post("http://localhost:61691/dataEntry/fetch", formicka.values)
+        .then((res) => {
+          console.log(res);
+          toast("Data Inserted");
+        })
+
+        .catch((err) => {
+          let toastMessage = "";
+          console.log(err.response);
+          if (!err.response) {
+            toastMessage = err.message;
+          } else toastMessage = err.response.data;
+          toast(toastMessage);
+        });
     },
   });
 
@@ -78,6 +97,7 @@ function Fetch() {
       <div className="Footer text-align-center">
         <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
         <p>Reg No. 4018-FBAS/BSCS/F18</p>
+        <ToastContainer />
       </div>
     </div>
   );
