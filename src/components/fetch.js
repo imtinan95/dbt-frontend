@@ -8,22 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 const logo = "/logo.png";
 
 function Fetch() {
-  const formicka = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      pass: "",
-    },
-    onSubmit: (values) => {
-      console.log("form vales", formicka.values);
+  const handleSubmit = (mode, formicka) => {
+    console.log(mode);
+    console.log("form vales", formicka.values);
 
+    if (mode === "submit") {
       axios
         .post("http://localhost:61691/dataEntry/fetch", formicka.values)
         .then((res) => {
           console.log(res);
           toast("Data Inserted");
         })
-
         .catch((err) => {
           let toastMessage = "";
           console.log(err.response);
@@ -32,6 +27,28 @@ function Fetch() {
           } else toastMessage = err.response.data;
           toast(toastMessage);
         });
+    } else {
+      axios
+        .delete("http://localhost:61691/dataEntry/fetch", formicka.values)
+        .then((res) => {
+          console.log(res);
+          toast("Data Deleted");
+        })
+        .catch((err) => {
+          let toastMessage = "";
+          console.log(err.response);
+          if (!err.response) {
+            toastMessage = err.message;
+          } else toastMessage = err.response.data;
+          toast(toastMessage);
+        });
+    }
+  };
+  const formicka = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      pass: "",
     },
   });
 
@@ -90,7 +107,18 @@ function Fetch() {
               />
             </label>
 
-            <button type="submit">Submit</button>
+            <button
+              type="submit"
+              onClick={() => handleSubmit("submit", formicka)}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSubmit("delete", formicka)}
+            >
+              delete
+            </button>
           </form>
         </div>
       </div>
