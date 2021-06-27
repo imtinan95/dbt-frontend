@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
 import './assets/App.css';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 
-const logo = '/logo.png';
 function App() {
     return (
         <div className="App">
-            <div className="Header">
-                <img src={logo} width="150" alt="FPSC_Logo" />
-                <div className="Title text-align-center">
-                    <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
-                    <h3>Main Menu</h3>
-                </div>
-            </div>
+            <Header>
+                <h3>Main Menu</h3>
+            </Header>
             <div className="Body text-align-center">
                 <div>
                     <Link to="/">
@@ -49,10 +46,7 @@ function App() {
                     </Link>
                 </div>
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <Footer />
         </div>
     );
 }
