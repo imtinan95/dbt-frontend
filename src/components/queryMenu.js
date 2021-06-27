@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import "../assets/App.css";
 
 const logo = "/logo.png";
-function queryForm() {
+function QueryForm() {
+  const handleSubmit = (mode) => {
+    console.log("testing Mode", mode);
+  };
+
   return (
     <div className="App">
       <div className="Header">
@@ -22,19 +26,37 @@ function queryForm() {
           </Link>
         </div>
         <div>
-          <button className="Buttons">Candidates Query</button>
+          <Link to="/query/view">
+            <button
+              onClick={() => handleSubmit("candidates")}
+              className="Buttons"
+            >
+              Candidates Query
+            </button>
+          </Link>
         </div>
         <div>
-          <button className="Buttons">Divisions Query</button>
+          <button onClick={() => handleSubmit("divisions")} className="Buttons">
+            Divisions Query
+          </button>
         </div>
         <div>
-          <button className="Buttons">Employees Query</button>
+          <button onClick={() => handleSubmit("employees")} className="Buttons">
+            Employees Query
+          </button>
         </div>
         <div>
-          <button className="Buttons">Ministries Query</button>
+          <button
+            onClick={() => handleSubmit("ministries")}
+            className="Buttons"
+          >
+            Ministries Query
+          </button>
         </div>
         <div>
-          <button className="Buttons">Positions Query</button>
+          <button onClick={() => handleSubmit("positions")} className="Buttons">
+            Positions Query
+          </button>
         </div>
       </div>
       <div className="Footer text-align-center">
@@ -45,4 +67,4 @@ function queryForm() {
   );
 }
 
-export default queryForm;
+export default QueryForm;

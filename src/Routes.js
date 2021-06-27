@@ -6,6 +6,7 @@ const DataEntry = React.lazy(() => import("./components/dataEntryMenu"));
 const Query = React.lazy(() => import("./components/queryMenu"));
 const Report = React.lazy(() => import("./components/reportMenu"));
 
+// form Components
 const Candidates = React.lazy(() =>
   import("./components/forms/formCandidates")
 );
@@ -15,6 +16,10 @@ const Ministries = React.lazy(() =>
   import("./components/forms/formMinistries")
 );
 const Positions = React.lazy(() => import("./components/forms/formPositions"));
+//query components
+
+const QueryView = React.lazy(() => import("./components/queryView"));
+//testArea
 const Data = React.lazy(() => import("./components/fetch"));
 function Routes() {
   return (
@@ -48,6 +53,9 @@ function Routes() {
           </Route>
           <Route exact path="/queries">
             <Query />
+          </Route>
+          <Route exact path="/query/view">
+            <QueryView />
           </Route>
           <Route exact path="/reports">
             <Report />

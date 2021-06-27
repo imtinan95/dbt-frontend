@@ -8,13 +8,13 @@ import "react-toastify/dist/ReactToastify.css";
 const logo = "/logo.png";
 
 function Fetch() {
-  const handleSubmit = (mode, formicka) => {
+  const handleSubmit = (mode, formsica) => {
     console.log(mode);
-    console.log("form vales", formicka.values);
+    console.log("Flag 1", formsica.values);
 
     if (mode === "submit") {
       axios
-        .post("http://localhost:61691/dataEntry/fetch", formicka.values)
+        .post("http://localhost:61691/dataEntry/fetch/save", formsica.values)
         .then((res) => {
           console.log(res);
           toast("Data Inserted");
@@ -28,11 +28,13 @@ function Fetch() {
           toast(toastMessage);
         });
     } else {
+      console.log("Flag 2", formsica.values);
       axios
-        .delete("http://localhost:61691/dataEntry/fetch", formicka.values)
+        .post("http://localhost:61691/dataEntry/fetch/del", formsica.values)
         .then((res) => {
           console.log(res);
           toast("Data Deleted");
+          console.log("Flag 3", formsica.values);
         })
         .catch((err) => {
           let toastMessage = "";
@@ -41,6 +43,7 @@ function Fetch() {
             toastMessage = err.message;
           } else toastMessage = err.response.data;
           toast(toastMessage);
+          console.log("Flag 4", formsica.values);
         });
     }
   };
