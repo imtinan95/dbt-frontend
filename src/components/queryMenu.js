@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom';
 
 import '../assets/App.css';
 
+import queries from '../constants/queries';
+
 const logo = '/logo.png';
+
 function QueryForm() {
-    const handleSubmit = (mode) => {
-        console.log('testing Mode', mode);
-    };
+    // const handleSubmit = (mode) => {
+    //     console.log('testing Mode', mode);
+    // };
 
     return (
         <div className="App">
@@ -25,33 +28,16 @@ function QueryForm() {
                         </button>
                     </Link>
                 </div>
-                <div>
-                    <Link to="/query/view">
-                        <button type="button" onClick={() => handleSubmit('candidates')} className="Buttons">
-                            Candidates Query
-                        </button>
-                    </Link>
-                </div>
-                <div>
-                    <button type="button" onClick={() => handleSubmit('divisions')} className="Buttons">
-                        Divisions Query
-                    </button>
-                </div>
-                <div>
-                    <button type="button" onClick={() => handleSubmit('employees')} className="Buttons">
-                        Employees Query
-                    </button>
-                </div>
-                <div>
-                    <button type="button" onClick={() => handleSubmit('ministries')} className="Buttons">
-                        Ministries Query
-                    </button>
-                </div>
-                <div>
-                    <button type="button" onClick={() => handleSubmit('positions')} className="Buttons">
-                        Positions Query
-                    </button>
-                </div>
+
+                {queries.map((query) => (
+                    <div>
+                        <Link to={`/query/view?mode=${query}`}>
+                            <button type="button" className="Buttons">
+                                {query} Query
+                            </button>
+                        </Link>
+                    </div>
+                ))}
             </div>
             <div className="Footer text-align-center">
                 <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>

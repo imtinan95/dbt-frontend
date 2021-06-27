@@ -12,6 +12,7 @@ const Employees = React.lazy(() => import('./components/forms/formEmployees'));
 const Ministries = React.lazy(() => import('./components/forms/formMinistries'));
 const Positions = React.lazy(() => import('./components/forms/formPositions'));
 const Data = React.lazy(() => import('./components/fetch'));
+const QueryView = React.lazy(() => import('./components/queryView'));
 
 function Routes() {
     return (
@@ -47,6 +48,9 @@ function Routes() {
                     </Route>
                     <Route exact path="/getData">
                         <Data />
+                    </Route>
+                    <Route exact path="/query/view">
+                        <QueryView />
                     </Route>
                 </Switch>
             </Suspense>

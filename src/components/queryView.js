@@ -1,55 +1,97 @@
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useFormik } from "formik";
-import "../assets/fetch.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "../assets/App.css";
+/* eslint-disable no-unused-vars */
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import qs from 'query-string';
 
-const logo = "/logo.png";
+import '../assets/fetch.css';
+import 'react-toastify/dist/ReactToastify.css';
+import '../assets/App.css';
+import { useEffect, useState } from 'react';
+import queries from '../constants/queries';
+
+const logo = '/logo.png';
+
+const removeFirstLetter = (str) => {
+    if (!str) return null;
+    return str.substr(1, str.length);
+};
 
 function DataGet() {
-  axios.get("http://localhost:61691/query/candidate").then(function (response) {
-    // handle success
-    const axisData = response.data;
-    console.log(axisData);
-  });
+    const location = useLocation();
+    const history = useHistory();
 
-  return (
-    <div>
-      <h1>This is data get component</h1>
-    </div>
-  );
+    const [params, setParams] = useState(qs.parse(removeFirstLetter(location.search)));
+    const [data, setData] = useState([]);
+    const [query, setQuery] = useState(null);
+
+    const fetchQuery = () => {
+        axios.get(`http://localhost:61691/query/${params.mode}`).then((res) => {
+            // handle success
+            setData(res.data);
+        });
+    };
+
+    useEffect(() => {
+        const init = () => {
+            if (!queries.map((elem) => elem.key).includes(params.mode)) return history.push('/queries');
+
+            const matchedQuery = queries.find((elem) => elem.key === params.mode);
+            setQuery(matchedQuery);
+
+            fetchQuery();
+        };
+
+        init();
+    }, []);
+
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        {query.structure.map((header, index) => (
+                            <th key={`th-index-${index}`}>{header}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((row, index) => (
+                        <tr key={`tr-index-${index}`}>{query.structure.map((elem) => row[elem])}</tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 function QueryView() {
-  return (
-    <div className="App">
-      <div className="Header">
-        <img src={logo} width="150" alt="FPSC_Logo"></img>
-        <div className="Title text-align-center">
-          <h1 className="TitleName">
-            Federal Public Service Commission, Pakistan
-          </h1>
-          <h3>Query View</h3>
+    return (
+        <div className="App">
+            <div className="Header">
+                <img src={logo} width="150" alt="FPSC_Logo" />
+                <div className="Title text-align-center">
+                    <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
+                    <h3>Query View</h3>
+                </div>
+            </div>
+            <div className="Body text-align-center">
+                <div>
+                    <Link to="/queries">
+                        <button type="button" className="Buttons">
+                            Home
+                        </button>
+                    </Link>
+                </div>
+                <div>
+                    <DataGet />
+                </div>
+            </div>
+            <div className="Footer text-align-center">
+                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
+                <p>Reg No. 4018-FBAS/BSCS/F18</p>
+            </div>
         </div>
-      </div>
-      <div className="Body text-align-center">
-        <div>
-          <Link to="/queries">
-            <button className="Buttons">Home</button>
-          </Link>
-        </div>
-        <div>
-          <DataGet />
-        </div>
-      </div>
-      <div className="Footer text-align-center">
-        <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-        <p>Reg No. 4018-FBAS/BSCS/F18</p>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default QueryView;
