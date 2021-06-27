@@ -5,7 +5,7 @@
     "rules": {
         "no-unused-vars": "error",
         "object-shorthand": "off",
-        "react/prop-types": "off",
+        "react/prop-types": 0,
         "prettier/prettier": [
             "error",
             {

@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import '../assets/App.css';
 
 const logo = '/logo.png';
-function queryForm() {
+function QueryForm() {
+    const handleSubmit = (mode) => {
+        console.log('testing Mode', mode);
+    };
+
     return (
         <div className="App">
             <div className="Header">
@@ -22,27 +26,29 @@ function queryForm() {
                     </Link>
                 </div>
                 <div>
-                    <button type="button" className="Buttons">
-                        Candidates Query
-                    </button>
+                    <Link to="/query/view">
+                        <button type="button" onClick={() => handleSubmit('candidates')} className="Buttons">
+                            Candidates Query
+                        </button>
+                    </Link>
                 </div>
                 <div>
-                    <button type="button" className="Buttons">
+                    <button type="button" onClick={() => handleSubmit('divisions')} className="Buttons">
                         Divisions Query
                     </button>
                 </div>
                 <div>
-                    <button type="button" className="Buttons">
+                    <button type="button" onClick={() => handleSubmit('employees')} className="Buttons">
                         Employees Query
                     </button>
                 </div>
                 <div>
-                    <button type="button" className="Buttons">
+                    <button type="button" onClick={() => handleSubmit('ministries')} className="Buttons">
                         Ministries Query
                     </button>
                 </div>
                 <div>
-                    <button type="button" className="Buttons">
+                    <button type="button" onClick={() => handleSubmit('positions')} className="Buttons">
                         Positions Query
                     </button>
                 </div>
@@ -55,4 +61,4 @@ function queryForm() {
     );
 }
 
-export default queryForm;
+export default QueryForm;
