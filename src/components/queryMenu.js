@@ -30,10 +30,10 @@ function QueryForm() {
                 </div>
 
                 {queries.map((query) => (
-                    <div>
-                        <Link to={`/query/view?mode=${query}`}>
+                    <div key={query.key}>
+                        <Link to={`/query/view?mode=${query.key}`}>
                             <button type="button" className="Buttons">
-                                {query} Query
+                                {query.key} Query
                             </button>
                         </Link>
                     </div>

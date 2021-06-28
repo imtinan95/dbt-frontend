@@ -3,9 +3,10 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'query-string';
 
-import '../assets/fetch.css';
-import 'react-toastify/dist/ReactToastify.css';
+import '../assets/queryView.css';
 import '../assets/App.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useEffect, useState } from 'react';
 import queries from '../constants/queries';
 
@@ -25,7 +26,7 @@ function DataGet() {
     const [query, setQuery] = useState(null);
 
     const fetchQuery = () => {
-        axios.get(`http://localhost:61691/query/${params.mode}`).then((res) => {
+        axios.get(`http://localhost:61691/${params.mode}`).then((res) => {
             // handle success
             setData(res.data);
         });
@@ -33,30 +34,32 @@ function DataGet() {
 
     useEffect(() => {
         const init = () => {
-            if (!queries.map((elem) => elem.key).includes(params.mode)) return history.push('/queries');
-
-            const matchedQuery = queries.find((elem) => elem.key === params.mode);
+            if (!queries.map((row) => row.key).includes(params.mode)) return history.push('/queries');
+            const matchedQuery = queries.find((row) => row.key === params.mode);
             setQuery(matchedQuery);
-
             fetchQuery();
         };
-
         init();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <div>
+        <div className="Body">
             <table>
                 <thead>
                     <tr>
-                        {query.structure.map((header, index) => (
+                        {query?.structure?.map((header, index) => (
                             <th key={`th-index-${index}`}>{header}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((row, index) => (
-                        <tr key={`tr-index-${index}`}>{query.structure.map((elem) => row[elem])}</tr>
+                        <tr key={`tr-index-${index}`}>
+                            {query?.structure?.map((elem) => (
+                                <td>{row[elem]}</td>
+                            ))}
+                        </tr>
                     ))}
                 </tbody>
             </table>
