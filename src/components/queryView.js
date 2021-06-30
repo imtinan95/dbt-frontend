@@ -43,6 +43,9 @@ function DataGet() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    console.log(query);
+    console.log(data);
+
     return (
         <div className="Body">
             <table>
