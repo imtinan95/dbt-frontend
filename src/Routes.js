@@ -13,6 +13,7 @@ const Ministries = React.lazy(() => import('./components/forms/formMinistries'))
 const Positions = React.lazy(() => import('./components/forms/formPositions'));
 const Data = React.lazy(() => import('./components/fetch'));
 const QueryView = React.lazy(() => import('./components/queryView'));
+const ReportView = React.lazy(() => import('./components/reportView'));
 
 function Routes() {
     return (
@@ -51,6 +52,9 @@ function Routes() {
                     </Route>
                     <Route exact path="/query/view">
                         <QueryView />
+                    </Route>
+                    <Route exact path="/report/view">
+                        <ReportView />
                     </Route>
                 </Switch>
             </Suspense>

@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'query-string';
 
-import '../assets/queryView.css';
+import '../assets/reportView.css';
 import '../assets/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -77,12 +77,12 @@ function QueryView() {
                 <img src={logo} width="150" alt="FPSC_Logo" />
                 <div className="Title text-align-center">
                     <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
-                    <h3>Query View</h3>
+                    <h3>Report View</h3>
                 </div>
             </div>
             <div className="Body text-align-center">
                 <div>
-                    <Link to="/queries">
+                    <Link to="/reports">
                         <button type="button" className="Buttons">
                             Back
                         </button>

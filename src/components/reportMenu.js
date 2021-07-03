@@ -2,8 +2,15 @@ import { Link } from 'react-router-dom';
 
 import '../assets/App.css';
 
+import queries from '../constants/queries';
+
 const logo = '/logo.png';
-function reportForm() {
+
+function ReportMenu() {
+    // const handleSubmit = (mode) => {
+    //     console.log('testing Mode', mode);
+    // };
+
     return (
         <div className="App">
             <div className="Header">
@@ -14,26 +21,23 @@ function reportForm() {
                 </div>
             </div>
             <div className="Body text-align-center">
-                <Link to="/">
-                    <button type="button" className="Buttons">
-                        Home
-                    </button>
-                </Link>
-                <button type="button" className="Buttons">
-                    Candidates Report
-                </button>
-                <button type="button" className="Buttons">
-                    Divisions Report
-                </button>
-                <button type="button" className="Buttons">
-                    Employees Report
-                </button>
-                <button type="button" className="Buttons">
-                    Ministries Report
-                </button>
-                <button type="button" className="Buttons">
-                    Positions Report
-                </button>
+                <div>
+                    <Link to="/">
+                        <button type="button" className="Buttons">
+                            Home
+                        </button>
+                    </Link>
+                </div>
+
+                {queries.map((query) => (
+                    <div key={query.key}>
+                        <Link to={`/report/view?mode=${query.key}`}>
+                            <button type="button" className="Buttons">
+                                {query.key} Report
+                            </button>
+                        </Link>
+                    </div>
+                ))}
             </div>
             <div className="Footer text-align-center">
                 <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
@@ -43,4 +47,4 @@ function reportForm() {
     );
 }
 
-export default reportForm;
+export default ReportMenu;
