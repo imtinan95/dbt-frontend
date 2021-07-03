@@ -180,6 +180,10 @@ function CandidateForm() {
                             Update
                         </button>
                     </form>
+                    <br />
+                    <p>The Deletion is performed on bases of Roll No.</p>
+                    <p>The Updation is performed on Canndidate Name, Contact, Date of Birth and Degree. </p>
+                    <p>CNIC and Roll No are not allow to be changed.</p>
                 </div>
             </div>
             <ToastContainer />

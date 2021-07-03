@@ -2,24 +2,17 @@ import { Link } from 'react-router-dom';
 
 import '../assets/App.css';
 
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+
 import queries from '../constants/queries';
 
-const logo = '/logo.png';
-
 function ReportMenu() {
-    // const handleSubmit = (mode) => {
-    //     console.log('testing Mode', mode);
-    // };
-
     return (
         <div className="App">
-            <div className="Header">
-                <img src={logo} width="150" alt="FPSC_Logo" />
-                <div className="Title text-align-center">
-                    <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
-                    <h3>Report Menu</h3>
-                </div>
-            </div>
+            <Header>
+                <h3>Report Menu</h3>
+            </Header>
             <div className="Body text-align-center">
                 <div>
                     <Link to="/">
@@ -28,7 +21,7 @@ function ReportMenu() {
                         </button>
                     </Link>
                 </div>
-
+                <br />
                 {queries.map((query) => (
                     <div key={query.key}>
                         <Link to={`/report/view?mode=${query.key}`}>
@@ -39,10 +32,7 @@ function ReportMenu() {
                     </div>
                 ))}
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <Footer />
         </div>
     );
 }

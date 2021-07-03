@@ -2,12 +2,15 @@
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'query-string';
+import { useEffect, useState } from 'react';
 
 import '../assets/queryView.css';
 import '../assets/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useEffect, useState } from 'react';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
+
 import queries from '../constants/queries';
 
 const logo = '/logo.png';
@@ -26,7 +29,7 @@ function DataGet() {
     const [query, setQuery] = useState(null);
 
     const fetchQuery = () => {
-        axios.get(`http://localhost:61691/${params.mode}`).then((res) => {
+        axios.get(`http://119.158.112.136:61691/${params.mode}`).then((res) => {
             // handle success
             setData(res.data);
         });
@@ -92,10 +95,7 @@ function QueryView() {
                     <DataGet />
                 </div>
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <Footer />
         </div>
     );
 }

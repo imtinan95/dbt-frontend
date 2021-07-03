@@ -17,13 +17,14 @@ function App() {
                         </button>
                     </Link>
                 </div>
-                <div>
+                {/* <div>
                     <Link to="/getData">
                         <button type="button" className="Buttons">
                             Get Data
                         </button>
                     </Link>
-                </div>
+                </div> */}
+                <br />
                 <div>
                     <Link to="/dataEntry">
                         <button type="button" className="Buttons">

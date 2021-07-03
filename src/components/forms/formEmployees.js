@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import '../../assets/App.css';
 import '../../assets/dataEntryForm.css';
 
-const logo = '/logo.png';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
 
 function EmployeeForm() {
     const formikEmp = useFormik({
@@ -22,13 +23,7 @@ function EmployeeForm() {
 
     return (
         <div className="App">
-            <div className="Header">
-                <img src={logo} width="150" alt="FPSC_Logo" />
-                <div className="Title text-align-center">
-                    <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
-                    <h3>Employee Data Entry Menu</h3>
-                </div>
-            </div>
+            <Header>Employee Data Entry Menu</Header>
             <div className="Body text-align-center">
                 <div>
                     <Link to="/dataEntry">
@@ -116,10 +111,7 @@ function EmployeeForm() {
                     </button>
                 </div>
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <Footer />
         </div>
     );
 }

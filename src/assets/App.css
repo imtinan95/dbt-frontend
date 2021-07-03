@@ -33,7 +33,7 @@ html {
   justify-content: space-between;
   align-content: space-between;
 
-  height: 80%;
+  min-height: auto;
 }
 .Buttons {
   font-size: 20px;
@@ -46,6 +46,7 @@ html {
   text-decoration: none;
 
   width: 400px;
+  
 }
 
 .Buttons:hover {
@@ -55,7 +56,7 @@ html {
 
 .Footer {
   background-color: wheat;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }

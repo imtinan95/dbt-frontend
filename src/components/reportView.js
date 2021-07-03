@@ -2,13 +2,16 @@
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'query-string';
+import { useEffect, useState } from 'react';
 
 import '../assets/reportView.css';
 import '../assets/App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useEffect, useState } from 'react';
 import queries from '../constants/queries';
+
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 
 const logo = '/logo.png';
 
@@ -48,11 +51,13 @@ function DataGet() {
 
     return (
         <div className="Body">
-            <table>
+            <table className="Table">
                 <thead>
                     <tr>
                         {query?.structure?.map((header, index) => (
-                            <th key={`th-index-${index}`}>{header}</th>
+                            <th className="TH" key={`th-index-${index}`}>
+                                {header}
+                            </th>
                         ))}
                     </tr>
                 </thead>
@@ -60,7 +65,7 @@ function DataGet() {
                     {data.map((row, index) => (
                         <tr key={`tr-index-${index}`}>
                             {query?.structure?.map((elem) => (
-                                <td>{row[elem]}</td>
+                                <td className="TH">{row[elem]}</td>
                             ))}
                         </tr>
                     ))}
@@ -92,10 +97,7 @@ function QueryView() {
                     <DataGet />
                 </div>
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <Footer />
         </div>
     );
 }

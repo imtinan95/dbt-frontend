@@ -1,33 +1,80 @@
+import axios from 'axios';
 import { useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 import '../../assets/App.css';
 import '../../assets/dataEntryForm.css';
 
-const logo = '/logo.png';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
 
 function DivisionsForm() {
+    const handleSubmit = (mode, form) => {
+        console.log(mode);
+        console.log('candidate form values', form.values);
+
+        if (mode === 'submit') {
+            axios
+                .post('http://localhost:61691/divisions/', form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Inserted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else if (mode === 'delete') {
+            axios
+                .delete(`http://localhost:61691/divisions/${form.values.DivisionID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Deleted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else {
+            axios
+                .patch(`http://localhost:61691/divisions/${form.values.DivisionID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Updated');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        }
+    };
     const formikaDivisions = useFormik({
         initialValues: {
-            divID: '',
-            divName: '',
-            divManager: '',
-            divContact: '',
-            minID: '',
-        },
-        onSubmit: (values) => {
-            console.log('Divisions Data', values);
+            DivisionID: '',
+            DivisionName: '',
+            DivisionManager: '',
+            ParentMinistry: '',
+            Contact: '',
+            MinistryID: '',
         },
     });
     return (
         <div className="App">
-            <div className="Header">
-                <img src={logo} width="150" alt="FPSC_Logo" />
-                <div className="Title text-align-center">
-                    <h1 className="TitleName">Federal Public Service Commission, Pakistan</h1>
-                    <h3>Divisions Data Entry Menu</h3>
-                </div>
-            </div>
+            <Header>Divisions Data Entry Menu</Header>
             <div className="Body text-align-center">
                 <div>
                     <Link to="/dataEntry">
@@ -38,84 +85,99 @@ function DivisionsForm() {
                 </div>
                 <div className="dataContainer">
                     <form onSubmit={formikaDivisions.handleSubmit}>
-                        <label htmlFor="divID" className="labels">
+                        <label htmlFor="DivisionID" className="labels">
                             Division ID:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="divID"
-                                name="divID"
+                                id="DivisionID"
+                                name="DivisionID"
                                 onChange={formikaDivisions.handleChange}
-                                values={formikaDivisions.values.divID}
+                                values={formikaDivisions.values.DivisionID}
                             />
                         </label>
 
-                        <label htmlFor="divName" className="labels">
+                        <label htmlFor="DivisionName" className="labels">
                             Division Name:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="divName"
-                                name="divName"
+                                id="DivisionName"
+                                name="DivisionName"
                                 onChange={formikaDivisions.handleChange}
-                                values={formikaDivisions.values.divName}
+                                values={formikaDivisions.values.DivisionName}
                             />
                         </label>
-                        <label htmlFor="divManager" className="labels">
+                        <label htmlFor="DivisionManager" className="labels">
                             Division Manager:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="divManager"
-                                name="divManager"
+                                id="DivisionManager"
+                                name="DivisionManager"
                                 onChange={formikaDivisions.handleChange}
-                                values={formikaDivisions.values.divManager}
+                                values={formikaDivisions.values.DivisionManager}
                             />
                         </label>
-                        <label htmlFor="divContact" className="labels">
+                        <label htmlFor="Contact" className="labels">
                             Division Contact:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="divContact"
-                                name="divContact"
+                                id="Contact"
+                                name="Contact"
                                 onChange={formikaDivisions.handleChange}
-                                values={formikaDivisions.values.divContact}
+                                values={formikaDivisions.values.Contact}
                             />
                         </label>
-                        <label htmlFor="minID" className="labels">
+                        <label htmlFor="ParentMinistry" className="labels">
+                            Parent Ministry:
+                            <input
+                                type="text"
+                                className="inputFields"
+                                id="ParentMinistry"
+                                name="ParentMinistry"
+                                onChange={formikaDivisions.handleChange}
+                                values={formikaDivisions.values.ParentMinistry}
+                            />
+                        </label>
+                        <label htmlFor="MinistryID" className="labels">
                             Ministry ID:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minID"
-                                name="minID"
+                                id="MinistryID"
+                                name="MinistryID"
                                 onChange={formikaDivisions.handleChange}
-                                values={formikaDivisions.values.minID}
+                                values={formikaDivisions.values.MinistryID}
                             />
                         </label>
-                        <button className="Buttons" type="submit">
-                            Save
+                        <button
+                            className="Buttons"
+                            type="submit"
+                            onClick={() => handleSubmit('submit', formikaDivisions)}
+                        >
+                            Submit
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('delete', formikaDivisions)}
+                        >
+                            Delete
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('update', formikaDivisions)}
+                        >
+                            Update
                         </button>
                     </form>
                 </div>
-                <div className="submitButtons">
-                    <button type="button" className="Buttons">
-                        Previous
-                    </button>
-
-                    <button type="button" className="Buttons">
-                        Delete
-                    </button>
-                    <button type="button" className="Buttons">
-                        Next
-                    </button>
-                </div>
             </div>
-            <div className="Footer text-align-center">
-                <h3>Developed by Muhammad Imtinan Ul Haq in React</h3>
-                <p>Reg No. 4018-FBAS/BSCS/F18</p>
-            </div>
+            <ToastContainer />
+            <Footer />
         </div>
     );
 }
