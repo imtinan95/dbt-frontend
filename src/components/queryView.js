@@ -29,7 +29,7 @@ function DataGet() {
     const [query, setQuery] = useState(null);
 
     const fetchQuery = () => {
-        axios.get(`http://119.158.112.136:61691/${params.mode}`).then((res) => {
+        axios.get(`http://localhost:61691/${params.mode}`).then((res) => {
             // handle success
             setData(res.data);
         });

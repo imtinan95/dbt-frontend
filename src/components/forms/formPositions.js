@@ -1,23 +1,73 @@
-import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
-
-import '../../assets/App.css';
-import '../../assets/dataEntryForm.css';
-
+import axios from 'axios';
+import { useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 
+import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/App.css';
+import '../../assets/dataEntryForm.css';
+
 function PositionsForm() {
+    const handleSubmit = (mode, form) => {
+        console.log(mode);
+        console.log('Positions form values', form.values);
+
+        if (mode === 'submit') {
+            axios
+                .post('http://localhost:61691/positions/', form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Inserted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else if (mode === 'delete') {
+            axios
+                .delete(`http://localhost:61691/positions/${form.values.PosID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Deleted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else {
+            axios
+                .patch(`http://localhost:61691/positions/${form.values.PosID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Updated');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        }
+    };
     const formikPositions = useFormik({
         initialValues: {
-            posID: '',
-            posName: '',
-            posDesignation: '',
-            posPay: '',
-            posCity: '',
-        },
-        onSubmit: (values) => {
-            console.log('Position Data', values);
+            PosID: '',
+            PositionName: '',
+            Desgination: '',
+            Pay: '',
+            PostingCity: '',
         },
     });
 
@@ -35,79 +85,86 @@ function PositionsForm() {
 
                 <div className="dataContainer">
                     <form onSubmit={formikPositions.handleSubmit}>
-                        <label htmlFor="posID" className="labels">
+                        <label htmlFor="PosID" className="labels">
                             Position ID:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="posID"
-                                name="posID"
+                                id="PosID"
+                                name="PosID"
                                 onChange={formikPositions.handleChange}
-                                value={formikPositions.values.posID}
+                                value={formikPositions.values.PosID}
                             />
                         </label>
-                        <label htmlFor="posName" className="labels">
+                        <label htmlFor="PositionName" className="labels">
                             Position Name:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="posName"
-                                name="posName"
+                                id="PositionName"
+                                name="PositionName"
                                 onChange={formikPositions.handleChange}
-                                value={formikPositions.values.posName}
+                                value={formikPositions.values.PositionName}
                             />
                         </label>
-                        <label htmlFor="posDesignation" className="labels">
+                        <label htmlFor="Desgination" className="labels">
                             Designation:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="posDesignation"
-                                name="posDesignation"
+                                id="Desgination"
+                                name="Desgination"
                                 onChange={formikPositions.handleChange}
-                                value={formikPositions.values.posDesignation}
+                                value={formikPositions.values.Desgination}
                             />
                         </label>
-                        <label htmlFor="posPay" className="labels">
+                        <label htmlFor="Pay" className="labels">
                             Position Pay:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="posPay"
-                                name="posPay"
+                                id="Pay"
+                                name="Pay"
                                 onChange={formikPositions.handleChange}
-                                value={formikPositions.values.posPay}
+                                value={formikPositions.values.Pay}
                             />
                         </label>
-                        <label htmlFor="posCity" className="labels">
+                        <label htmlFor="PostingCity" className="labels">
                             Posting City:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="posCity"
-                                name="posCity"
+                                id="PostingCity"
+                                name="PostingCity"
                                 onChange={formikPositions.handleChange}
-                                value={formikPositions.values.posCity}
+                                value={formikPositions.values.PostingCity}
                             />
                         </label>
-                        <button className="Buttons" type="submit">
-                            Save
+                        <button
+                            className="Buttons"
+                            type="submit"
+                            onClick={() => handleSubmit('submit', formikPositions)}
+                        >
+                            Submit
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('delete', formikPositions)}
+                        >
+                            Delete
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('update', formikPositions)}
+                        >
+                            Update
                         </button>
                     </form>
                 </div>
-                <div className="submitButtons">
-                    <button type="button" className="Buttons">
-                        Previous
-                    </button>
-
-                    <button type="button" className="Buttons">
-                        Delete
-                    </button>
-                    <button type="button" className="Buttons">
-                        Next
-                    </button>
-                </div>
             </div>
+            <ToastContainer />
             <Footer />
         </div>
     );

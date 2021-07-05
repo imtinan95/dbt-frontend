@@ -1,20 +1,73 @@
-import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
-
-import '../../assets/App.css';
-import '../../assets/dataEntryForm.css';
-
+import axios from 'axios';
+import { useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 
+import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/App.css';
+import '../../assets/dataEntryForm.css';
+
 function MinistryForm() {
+    const handleSubmit = (mode, form) => {
+        console.log(mode);
+        console.log('Ministry form values', form.values);
+
+        if (mode === 'submit') {
+            axios
+                .post('http://localhost:61691/ministries/', form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Inserted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else if (mode === 'delete') {
+            axios
+                .delete(`http://localhost:61691/ministries/${form.values.MinistryID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Deleted');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        } else {
+            axios
+                .patch(`http://localhost:61691/ministries/${form.values.MinistryID}`, form.values)
+                .then((res) => {
+                    console.log(res);
+                    toast('Data Updated');
+                })
+                .catch((err) => {
+                    let toastMessage = '';
+                    console.log(err.response);
+                    if (!err.response) {
+                        toastMessage = err.message;
+                    } else toastMessage = err.response.data;
+                    toast(toastMessage);
+                });
+        }
+    };
     const formikMinistry = useFormik({
         initialValues: {
-            minID: '',
-            minName: '',
-            minHQ: '',
-            minDivs: '',
-            minstrRes: '',
+            MinistryID: '',
+            MinistryName: '',
+            MinistryHQ: '',
+            MinistryDivisions: '',
+            MinisterResponsible: '',
         },
         onSubmit: (values) => {
             console.log('Ministry Data', values);
@@ -33,84 +86,91 @@ function MinistryForm() {
                 </div>
                 <div className="dataContainer">
                     <form onSubmit={formikMinistry.handleSubmit}>
-                        <label htmlFor="minID" className="labels">
+                        <label htmlFor="MinistryID" className="labels">
                             Ministry ID:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minID"
-                                name="minID"
+                                id="MinistryID"
+                                name="MinistryID"
                                 onChange={formikMinistry.handleChange}
-                                values={formikMinistry.values.minID}
+                                values={formikMinistry.values.MinistryID}
                             />
                         </label>
 
-                        <label htmlFor="minName" className="labels">
+                        <label htmlFor="MinistryName" className="labels">
                             Ministry Name:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minName"
-                                name="minName"
+                                id="MinistryName"
+                                name="MinistryName"
                                 onChange={formikMinistry.handleChange}
-                                values={formikMinistry.values.minName}
+                                values={formikMinistry.values.MinistryName}
                             />
                         </label>
 
-                        <label htmlFor="minHQ" className="labels">
+                        <label htmlFor="MinistryHQ" className="labels">
                             Ministry HQ:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minHQ"
-                                name="minHQ"
+                                id="MinistryHQ"
+                                name="MinistryHQ"
                                 onChange={formikMinistry.handleChange}
-                                values={formikMinistry.values.minHQ}
+                                values={formikMinistry.values.MinistryHQ}
                             />
                         </label>
 
-                        <label htmlFor="minDivs" className="labels">
+                        <label htmlFor="MinistryDivisions" className="labels">
                             Ministry Divisions:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minDivs"
-                                name="minDivs"
+                                id="MinistryDivisions"
+                                name="MinistryDivisions"
                                 onChange={formikMinistry.handleChange}
-                                values={formikMinistry.values.minDivs}
+                                values={formikMinistry.values.MinistryDivisions}
                             />
                         </label>
 
-                        <label htmlFor="minstrRes" className="labels">
+                        <label htmlFor="MinisterResponsible" className="labels">
                             Minister Responsible:
                             <input
                                 type="text"
                                 className="inputFields"
-                                id="minstrRes"
-                                name="minstrRes"
+                                id="MinisterResponsible"
+                                name="MinisterResponsible"
                                 onChange={formikMinistry.handleChange}
-                                values={formikMinistry.values.minstrRes}
+                                values={formikMinistry.values.MinisterResponsible}
                             />
                         </label>
 
-                        <button className="Buttons" type="submit">
-                            Save
+                        <button
+                            className="Buttons"
+                            type="submit"
+                            onClick={() => handleSubmit('submit', formikMinistry)}
+                        >
+                            Submit
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('delete', formikMinistry)}
+                        >
+                            Delete
+                        </button>
+                        <button
+                            className="Buttons"
+                            type="button"
+                            onClick={() => handleSubmit('update', formikMinistry)}
+                        >
+                            Update
                         </button>
                     </form>
                 </div>
-                <div className="submitButtons">
-                    <button type="button" className="Buttons">
-                        Previous
-                    </button>
-
-                    <button type="button" className="Buttons">
-                        Delete
-                    </button>
-                    <button type="button" className="Buttons">
-                        Next
-                    </button>
-                </div>
             </div>
+            <ToastContainer />
             <Footer />
         </div>
     );
